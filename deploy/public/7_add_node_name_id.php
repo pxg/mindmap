@@ -55,7 +55,7 @@
     #add-node{
         position:absolute;
         left: 820px;
-        top: 20;
+        top: 20px;
     }
 
     #add-node-button, #add-node-name{
@@ -101,16 +101,20 @@
 
     function addNewNode() {
         $("#add-node-button").click(function() {
-            var node_id = 'blk-' + $('.node').size();
-            $('<div id="' + node_id + '" class="node blk ui-draggable"><h1>Node D</h1></div>').appendTo("div#main");
-            // add random position for div (700, 500)
+            var node_number = $('.node').size();
+            var node_id = 'blk-' + node_number;
+            var node_name = $('#add-node-name').val();
+            
+            $('<div id="' + node_id + '" class="node blk ui-draggable"><h1>' + node_name + '</h1></div>').appendTo("div#main");
+            
             $('#' + node_id).css('top', randomMinToMax(0, 500));
             $('#' + node_id).css('left', randomMinToMax(0, 700));
             
             addDraggableBehaviour();
             updateCanvas($("#canvas"), $(".node"));
-            
-            // set name for div from text input
+
+            node_number = node_number + 2;
+            $('#add-node-name').val('Node ' + node_number);
             return false;
         });
 
@@ -137,15 +141,15 @@
     <div id="main">
         <div id="blk-0" class="node blk ui-draggable">
 
-            <h1>Node A</h1>
+            <h1>Node 1</h1>
         </div>
 
         <div id="blk-1" class="node blk ui-draggable">
-            <h1>Node B</h1>
+            <h1>Node 2</h1>
         </div>
 
         <div id="blk-2" class="node blk ui-draggable">
-            <h1>Node C</h1>
+            <h1>Node 3</h1>
         </div>
 
         <div id="nucleus" class="blk ui-draggable">
@@ -154,11 +158,11 @@
 
         <canvas id="canvas"></canvas>
 
-        <form id="add-node">
-            <input type="text" id="add-node-name" value="Node D" />
+        <form id="add-node" action="">
+            <input type="text" id="add-node-name" value="Node 4" />
             <br/>
             <input type="submit" id="add-node-button" value="Add Node"/>
-        <form>
+        </form>
     </div>
 
 </body>

@@ -19,7 +19,6 @@
 
     <h3>tasks</h3>
     <ol>
-        <li>add input text for node name</li>
         <li>add the ability to add different node datasets using get variables</li>
         <li>seperate JS and CSS code</li>
         <li>write lightweight backend or store all data frontend</li>
@@ -30,7 +29,6 @@
 
     <ul>
         <li>research could this done "html5" with just client side storage? canvas, etc</li>
-        <li>setup project on github account</li>
         <li>choose backend, symfony + doctrine (2)?</li>
     </ul>
 
@@ -63,6 +61,8 @@
         <li>delete item</li>
         <li>drag and drop new node</li>
         <li>animate nodes in</li>
+        <li>add validation on node name</li>
+        <li>add tooltip on nodename input</li>
         <li>add expanded description for item and link</li>
     </ul>
 
