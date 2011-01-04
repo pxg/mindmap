@@ -28,6 +28,7 @@
     <h3>notes</h3>
 
     <ul>
+        <li>launch alpha to mailing lists once html5 saving is working client side</li>
         <li>research could this done "html5" with just client side storage? canvas, etc</li>
         <li>choose backend, symfony + doctrine (2)?</li>
     </ul>
@@ -43,6 +44,7 @@
         <li>have different maps in tabs</li>
         <li>change to grid view to order items</li>
         <li>style nodes nicely, rounded edges, canvas/css3 arrows to items, fluffy cloud, etc</li>
+        <li>draw nucleus as a collection of circles</li>
         <li>focus on selected node</li>
     </ol>
 
