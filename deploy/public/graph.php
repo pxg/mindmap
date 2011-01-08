@@ -45,6 +45,7 @@
 
     .node{
         background-color: #FFF58E;
+        width: 170px;
     }
 
     #nucleus{
@@ -119,7 +120,7 @@
     function addNewNodeHtml(node_name, x_position, y_position){
         var node_number = $('.node').size();
         var node_id = 'blk-' + node_number;
-        $('<div id="' + node_id + '" class="node blk ui-draggable"><h1>' + node_name + ' ' + x_position + '</h1></div>').appendTo("div#main");
+        $('<div id="' + node_id + '" class="node blk ui-draggable"><h1>' + node_name + '</h1></div>').appendTo("div#main");
         $('#' + node_id).css('top', y_position);
         $('#' + node_id).css('left', x_position);
         return node_number;
