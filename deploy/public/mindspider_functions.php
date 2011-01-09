@@ -36,6 +36,14 @@ function getNodes($graphId){
     return $nodes;
 }
 
+function updateNode($nodeId, $data){
+    
+}
+
+function addNode($data){
+    
+}
+
 function processCreateGraphForm(){
     // check for post and value on form
     // add db item

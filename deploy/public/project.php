@@ -1,4 +1,4 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta equiv="Content-type" content="text/html; charset=utf8" />
@@ -18,19 +18,23 @@
     </ol>
 
     <h3>tasks</h3>
+
     <ol>
-        <li>add the ability to add different node datasets using get variables</li>
+        <li>finish dragging node ajax update (store db id in html)</li>
+        <li>add node ajax add</li>
+        <li>draw nodes, draw nucleus (new js function)</li>
+        <li>currently selected node hightlight</li>
+        <li>edit node info ajax update (only update columns given)</li>
         <li>seperate JS and CSS code</li>
-        <li>write lightweight backend or store all data frontend</li>
         <li>check it matches to Pete Goodman frontend guidelines</li>
     </ol>
 
     <h3>notes</h3>
 
     <ul>
-        <li>launch alpha to mailing lists once html5 saving is working client side</li>
-        <li>research could this done "html5" with just client side storage? canvas, etc</li>
-        <li>choose backend, symfony + doctrine (2)?</li>
+        <li>launch alpha to mailing lists once this version is complete</li>
+        <li>research could this done "html5" with just client side storage for offline/pre-register?</li>
+        <li>choose backend, symfony + doctrine</li>
     </ul>
 
     <hr/>
@@ -65,7 +69,7 @@
         <li>animate nodes in</li>
         <li>add validation on node name</li>
         <li>add tooltip on nodename input</li>
-        <li>add expanded description for item and link</li>
+        <li>add expanded description for item and link, lightbox?</li>
     </ul>
 
     <h3>notes</h3>
@@ -99,6 +103,7 @@
     <ul>
         <li>add ability to mark tasks as done</li>
         <li>abstract circular node view</li>
+        <li>expanding tree view?</li>
     </ul>
 </body>
 </html>

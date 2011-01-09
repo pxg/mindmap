@@ -1,4 +1,4 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta equiv="Content-type" content="text/html; charset=utf8" />
@@ -46,6 +46,7 @@
     .node{
         background-color: #FFF58E;
         width: 170px;
+        text-align: center;
     }
 
     #nucleus{
@@ -61,6 +62,10 @@
 
     #add-node-button, #add-node-name{
         font-size: 16px;
+    }
+
+    span.db_id{
+        display: none;
     }
 
 	</style>
@@ -98,7 +103,17 @@
         $(".ui-draggable").draggable({
 			drag: function() {
 				updateCanvas($("#canvas"), $(".node"));
-			}
+			},
+            stop: function(event, ui) {
+                // TODO: could we move the variable stuff to the updateNode function?
+                var db_id = ($(this).children('span').text());
+                var x_position = $(this).css('left'); // lose px
+                var y_position =  $(this).css('top'); // lose px
+                x_position = x_position.replace('px', '');
+                y_position = y_position.replace('px', '');
+                updateNode(db_id, x_position, y_position);
+            }
+
         });
     }
 
@@ -107,7 +122,8 @@
             var node_name = $('#add-node-name').val();
             var x_position = randomMinToMax(0, 700);
             var y_position = randomMinToMax(0, 500);
-            var node_number = addNewNodeHtml(node_name, x_position, y_position);
+            // create in backend before adding to graph (get db_id)
+            var node_number = addNewNodeHtml(node_name, x_position, y_position, '');
             addDraggableBehaviour();
             updateCanvas($("#canvas"), $(".node"));
             node_number = node_number + 2;
@@ -117,10 +133,10 @@
 
     }
 
-    function addNewNodeHtml(node_name, x_position, y_position){
+    function addNewNodeHtml(node_name, x_position, y_position, db_id){
         var node_number = $('.node').size();
         var node_id = 'blk-' + node_number;
-        $('<div id="' + node_id + '" class="node blk ui-draggable"><h1>' + node_name + '</h1></div>').appendTo("div#main");
+        $('<div id="' + node_id + '" class="node blk ui-draggable"><h1>' + node_name + '</h1><span class="db_id">' + db_id + '</span></div>').appendTo("div#main");
         $('#' + node_id).css('top', y_position);
         $('#' + node_id).css('left', x_position);
         return node_number;
@@ -152,9 +168,22 @@
         });
     }
 
+    function updateNode(db_id, x_position, y_position){
+        //TODO: can data be passed as an array?
+        $.ajax({
+            type: "POST",
+            url: "update_node.php",
+            //data: "name=John&location=Boston",
+            data: "id=" + db_id + "&x_position=" + x_position + "&y_position=" + y_position,
+            success: function(msg){
+                alert("Data Saved: " + msg);
+            }
+        });
+    }
+
     function createNodes(json){
         $.each(json, function(i,item){
-            addNewNodeHtml(item.name, parseInt(item.x_position), parseInt(item.y_position));
+            addNewNodeHtml(item.name, parseInt(item.x_position), parseInt(item.y_position), item.id);
         });
     }
 

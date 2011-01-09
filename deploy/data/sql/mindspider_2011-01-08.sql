@@ -4,7 +4,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.1.44)
 # Database: mindspider
-# Generation Time: 2011-01-08 18:35:02 +0000
+# Generation Time: 2011-01-08 22:13:53 +0000
 # ************************************************************
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -25,12 +25,19 @@ DROP TABLE IF EXISTS `graphs`;
 CREATE TABLE `graphs` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL DEFAULT '',
-  `x_position` int(11) NOT NULL,
-  `y_position` int(11) NOT NULL,
-  `graph_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
+LOCK TABLES `graphs` WRITE;
+/*!40000 ALTER TABLE `graphs` DISABLE KEYS */;
+INSERT INTO `graphs` (`id`,`name`)
+VALUES
+	(1,'tasks a'),
+	(2,'tasks b'),
+	(3,'tasks c');
+
+/*!40000 ALTER TABLE `graphs` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table nodes
@@ -42,9 +49,24 @@ CREATE TABLE `nodes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(20) NOT NULL,
   `number` int(11) DEFAULT NULL,
+  `x_position` int(11) DEFAULT NULL,
+  `y_position` int(11) DEFAULT NULL,
+  `graph_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
+LOCK TABLES `nodes` WRITE;
+/*!40000 ALTER TABLE `nodes` DISABLE KEYS */;
+INSERT INTO `nodes` (`id`,`name`,`number`,`x_position`,`y_position`,`graph_id`)
+VALUES
+	(1,'wash up',NULL,10,10,1),
+	(2,'vacuum living room',NULL,20,40,1),
+	(3,'have bath',NULL,30,50,1),
+	(4,'get boxes from shop',NULL,402,318,1),
+	(5,'cancel bills',NULL,280,106,2);
+
+/*!40000 ALTER TABLE `nodes` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 
