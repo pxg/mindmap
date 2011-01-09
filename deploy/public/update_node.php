@@ -1,3 +1,4 @@
 <?php
-print_r($_POST);
-//echo 'good ajax call';
+require_once 'mindspider_functions.php';
+$return = updateNode($_POST);
+echo $return;

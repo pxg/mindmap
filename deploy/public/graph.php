@@ -49,11 +49,6 @@
         text-align: center;
     }
 
-    #nucleus{
-        left: 300px;
-        top: 250px;
-    }
-
     #add-node{
         position:absolute;
         left: 820px;
@@ -82,7 +77,7 @@
 		ctx.clearRect(0, 0, canvasEl.width, canvasEl.height);
 		ctx.beginPath();
 
-        var targetDiv=$("#nucleus");
+        var targetDiv=$(".nucleus");
         var trgOffset=targetDiv.offset();
         var trgMidHeight=targetDiv.height()/2;
         var trgMidWidth=targetDiv.width()/2;
@@ -123,7 +118,7 @@
             var x_position = randomMinToMax(0, 700);
             var y_position = randomMinToMax(0, 500);
             // create in backend before adding to graph (get db_id)
-            var node_number = addNewNodeHtml(node_name, x_position, y_position, '');
+            var node_number = addNewNodeHtml(node_name, x_position, y_position, '', 0);
             addDraggableBehaviour();
             updateCanvas($("#canvas"), $(".node"));
             node_number = node_number + 2;
@@ -133,10 +128,14 @@
 
     }
 
-    function addNewNodeHtml(node_name, x_position, y_position, db_id){
-        var node_number = $('.node').size();
+    function addNewNodeHtml(node_name, x_position, y_position, db_id, nucleus){
+        var node_number = $('.blk').size();
         var node_id = 'blk-' + node_number;
-        $('<div id="' + node_id + '" class="node blk ui-draggable"><h1>' + node_name + '</h1><span class="db_id">' + db_id + '</span></div>').appendTo("div#main");
+        if(nucleus == 1){
+            $('<div id="' + node_id + '" class="nucleus blk ui-draggable"><h1>' + node_name + '</h1><span class="db_id">' + db_id + '</span></div>').appendTo("div#main");
+        }else{
+            $('<div id="' + node_id + '" class="node blk ui-draggable"><h1>' + node_name + '</h1><span class="db_id">' + db_id + '</span></div>').appendTo("div#main");
+        }
         $('#' + node_id).css('top', y_position);
         $('#' + node_id).css('left', x_position);
         return node_number;
@@ -173,17 +172,16 @@
         $.ajax({
             type: "POST",
             url: "update_node.php",
-            //data: "name=John&location=Boston",
             data: "id=" + db_id + "&x_position=" + x_position + "&y_position=" + y_position,
             success: function(msg){
-                alert("Data Saved: " + msg);
+                //alert("Data Saved: " + msg);
             }
         });
     }
 
     function createNodes(json){
         $.each(json, function(i,item){
-            addNewNodeHtml(item.name, parseInt(item.x_position), parseInt(item.y_position), item.id);
+            addNewNodeHtml(item.name, parseInt(item.x_position), parseInt(item.y_position), item.id, item.nucleus);
         });
     }
 
@@ -198,23 +196,13 @@
 </head>
 <body>
     <div id="main">
-        <div id="blk-0" class="node blk ui-draggable">
 
-            <h1>Node 1</h1>
-        </div>
-
-        <div id="blk-1" class="node blk ui-draggable">
-            <h1>Node 2</h1>
-        </div>
-
-        <div id="blk-2" class="node blk ui-draggable">
-            <h1>Node 3</h1>
-        </div>
-
+        <!--
         <div id="nucleus" class="blk ui-draggable">
             <h1>Nucleus</h1>
         </div>
-
+        -->
+        
         <canvas id="canvas"></canvas>
 
         <form id="add-node" action="">

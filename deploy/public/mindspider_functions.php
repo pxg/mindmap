@@ -36,12 +36,15 @@ function getNodes($graphId){
     return $nodes;
 }
 
-function updateNode($nodeId, $data){
-    
+function updateNode($data){
+    dbConnect();
+    $sql = sprintf('UPDATE nodes SET x_position = %d, y_position = %d where id = %d', $data['x_position'], $data['y_position'], $data['id']);
+    echo $sql;
+    return mysql_query($sql);
+    return $sql;
 }
 
 function addNode($data){
-    
 }
 
 function processCreateGraphForm(){
