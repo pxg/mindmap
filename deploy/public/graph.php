@@ -118,14 +118,22 @@
             var x_position = randomMinToMax(0, 700);
             var y_position = randomMinToMax(0, 500);
             // create in backend before adding to graph (get db_id)
-            var node_number = addNewNodeHtml(node_name, x_position, y_position, '', 0);
-            addDraggableBehaviour();
-            updateCanvas($("#canvas"), $(".node"));
-            node_number = node_number + 2;
-            $('#add-node-name').val('Node ' + node_number);
+            $.ajax({
+                type: "POST",
+                url: "add_node.php",
+                data: "x_position=" + x_position + "&y_position=" + y_position + "&name=" + node_name,
+                success: function(msg){
+                    alert("Data Saved: " + msg);
+                    var node_number = addNewNodeHtml(node_name, x_position, y_position, '', 0);
+                    addDraggableBehaviour();
+                    updateCanvas($("#canvas"), $(".node"));
+                    node_number = node_number + 2;
+                    $('#add-node-name').val('Node ' + node_number);
+                    //return false;
+                }
+            });
             return false;
         });
-
     }
 
     function addNewNodeHtml(node_name, x_position, y_position, db_id, nucleus){

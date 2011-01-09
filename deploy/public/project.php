@@ -27,6 +27,7 @@
         <li>edit node info ajax update (only update columns given)</li>
         <li>seperate JS and CSS code</li>
         <li>check it matches to Pete Goodman frontend guidelines</li>
+        <li>selected node has highest z-index (after nucleus)</li>
     </ol>
 
     <h3>notes</h3>
@@ -70,6 +71,7 @@
         <li>add validation on node name</li>
         <li>add tooltip on nodename input</li>
         <li>add expanded description for item and link, lightbox?</li>
+        <li>colour picker for node and background?</li>
     </ul>
 
     <h3>notes</h3>
