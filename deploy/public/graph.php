@@ -99,6 +99,12 @@
 			drag: function() {
 				updateCanvas($("#canvas"), $(".node"));
 			},
+//            start: function (){
+//                $('.node').css('background-color', '#FFF58E');
+//                if($(this).hasClass('node')){
+//                    $(this).css('background-color', '#FFF719');
+//                }
+//            },
             stop: function(event, ui) {
                 // TODO: could we move the variable stuff to the updateNode function?
                 var db_id = ($(this).children('span').text());
@@ -196,10 +202,18 @@
         });
     }
 
+    function highlightNode(){
+        $('.node').live('click', function() {
+            $('.node').css('background-color', '#FFF58E');
+            $(this).css('background-color', '#FFF719');
+        });
+    }
+
 	$(document).ready(function(){
         getNodes();
         addDraggableBehaviour();
         addNewNode();
+        highlightNode();
     });
 
 	</script>
@@ -207,12 +221,6 @@
 </head>
 <body>
     <div id="main">
-
-        <!--
-        <div id="nucleus" class="blk ui-draggable">
-            <h1>Nucleus</h1>
-        </div>
-        -->
         
         <canvas id="canvas"></canvas>
 
