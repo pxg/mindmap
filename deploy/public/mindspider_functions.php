@@ -37,14 +37,21 @@ function getNodes($graphId){
 }
 
 function updateNode($data){
+    if(isset($data['id']) == false){
+        return 'id must be set';
+    }
     dbConnect();
-    $sql = sprintf('UPDATE nodes SET x_position = %d, y_position = %d where id = %d', $data['x_position'], $data['y_position'], $data['id']);
-    echo $sql;
+    $sql = sprintf('UPDATE nodes SET x_position = %d, y_position = %d where id = %d', $data['x_position'], $data['y_position'], $data['id'])
+    or die(mysql_error());
     return mysql_query($sql);
-    return $sql;
 }
 
 function addNode($data){
+    dbConnect();
+    $name = mysql_escape_string($data['name']);
+    $sql = sprintf("INSERT INTO nodes (name, x_position, y_position, graph_id) VALUES('%s', %d, %d, %d)", $name, $data['x_position'], $data['y_position'], $data['graph_id']);
+    $result = mysql_query($sql);
+    return mysql_insert_id();
 }
 
 function processCreateGraphForm(){

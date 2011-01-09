@@ -117,14 +117,17 @@
             var node_name = $('#add-node-name').val();
             var x_position = randomMinToMax(0, 700);
             var y_position = randomMinToMax(0, 500);
-            // create in backend before adding to graph (get db_id)
+            // TODO: Make graph_id available throughout functions (Make class and var?)
+            var graph_id = getUrlVars()["id"];
+            
             $.ajax({
                 type: "POST",
                 url: "add_node.php",
-                data: "x_position=" + x_position + "&y_position=" + y_position + "&name=" + node_name,
+                data: "x_position=" + x_position + "&y_position=" + y_position + "&name=" + node_name + "&graph_id=" + graph_id,
                 success: function(msg){
-                    alert("Data Saved: " + msg);
-                    var node_number = addNewNodeHtml(node_name, x_position, y_position, '', 0);
+                    //alert("Data Saved: " + msg);
+                    var db_id = msg;
+                    var node_number = addNewNodeHtml(node_name, x_position, y_position, db_id, 0);
                     addDraggableBehaviour();
                     updateCanvas($("#canvas"), $(".node"));
                     node_number = node_number + 2;
